@@ -1,65 +1,146 @@
-import Image from "next/image";
+import Link from "next/link";
+import { OutputCard } from "@/components/output-card";
+import { Section } from "@/components/section";
+import { climateOutputs, pipelineStages } from "@/lib/mock-data";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <section className="relative isolate overflow-hidden border-b border-border/70">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-24 top-0 h-72 w-72 rounded-full bg-brand-700/15 blur-3xl" />
+          <div className="absolute -right-10 top-16 h-72 w-72 rounded-full bg-accent-500/20 blur-3xl" />
+        </div>
+
+        <div className="mx-auto w-full max-w-6xl px-6 py-24 lg:px-8 lg:py-28">
+          <div className="max-w-3xl">
+            <p className="font-mono text-xs tracking-[0.2em] text-brand-700">
+              RAVENSAI // EDEN
+            </p>
+            <h1 className="mt-6 text-4xl font-semibold tracking-tight text-brand-950 sm:text-5xl">
+              Climate intelligence for institutions making high-stakes
+              agricultural decisions.
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-slate-700">
+              Eden unifies climate, satellite, and agricultural datasets into
+              model-driven recommendations for planting windows, yield forecasts,
+              and climate risk alerts across African geographies.
+            </p>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <a
+                href="mailto:partners@ravensai.com?subject=Partner%20With%20RavensAI"
+                className="inline-flex items-center justify-center rounded-full border border-brand-900/25 bg-white px-6 py-3 text-sm font-semibold text-brand-900 transition hover:border-brand-900/45 hover:bg-surface-muted"
+                >
+                Partner With Us
+              </a>
+              <Link
+                href="/system"
+                className="inline-flex items-center justify-center rounded-full border border-brand-900/25 bg-white px-6 py-3 text-sm font-semibold text-brand-900 transition hover:border-brand-900/45 hover:bg-surface-muted"
+              >
+                Explore System Architecture
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Section
+        id="narrative"
+        eyebrow="Problem to Solution"
+        title="From fragmented climate data to operational readiness"
+        description="Institutions already hold extensive datasets, but translating these into actionable field decisions remains inconsistent, slow, and difficult to scale."
+      >
+        <div className="grid gap-6 lg:grid-cols-2">
+          <article className="rounded-2xl border border-border bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-brand-950">Problem</h3>
+            <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+              <li>Rainfall, soil, and crop data are stored across disconnected systems.</li>
+              <li>Decision windows are missed because analyses are manually assembled.</li>
+              <li>
+                Program teams lack transparent confidence levels for seasonal
+                planning decisions.
+              </li>
+            </ul>
+          </article>
+
+          <article className="rounded-2xl border border-brand-700/20 bg-surface-muted p-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-brand-950">Eden Solution</h3>
+            <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+              <li>Automated ingestion from trusted global climate and agriculture sources.</li>
+              <li>Model ensemble forecasting tuned for planting and risk intelligence.</li>
+              <li>
+                Decision outputs with traceable features, confidence scoring, and
+                partner-ready reporting.
+              </li>
+            </ul>
+          </article>
+        </div>
+      </Section>
+
+      <Section
+        eyebrow="System Overview"
+        title="Eden pipeline from raw observations to recommendations"
+        description="A modular architecture designed for transparent model operations and regional scale."
+      >
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {pipelineStages.map((stage) => (
+            <article
+              key={stage.step}
+              className="rounded-2xl border border-border bg-white p-5 shadow-sm"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              <p className="font-mono text-xs text-brand-700">STEP {stage.step}</p>
+              <h3 className="mt-3 text-lg font-semibold text-brand-950">
+                {stage.title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-700">
+                {stage.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        id="outputs"
+        eyebrow="Operational Outputs"
+        title="Example climate outputs generated by Eden"
+        description="Each output package is structured for direct use in planning meetings, advisories, and institutional dashboards."
+      >
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {climateOutputs.map((output) => (
+            <OutputCard key={output.id} output={output} />
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        className="pb-24"
+        eyebrow="Institutional Partnership"
+        title="Deploy Eden with your climate resilience and food security programs"
+        description="RavensAI collaborates with governments, NGOs, and research institutions to operationalize climate intelligence in real workflows."
+      >
+        <div className="rounded-3xl border border-brand-700/20 bg-white p-8 shadow-sm">
+          <p className="max-w-3xl text-sm leading-7 text-slate-700">
+            Partnership engagements include baseline data assessments, deployment
+            planning, and recurring output delivery customized to country or
+            district-level objectives.
           </p>
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="mailto:partners@ravensai.com?subject=Partner%20With%20RavensAI"
+              className="inline-flex items-center justify-center rounded-full bg-brand-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-950"
+            >
+              Partner With Us
+            </a>
+            <Link
+              href="/impact"
+              className="inline-flex items-center justify-center rounded-full border border-brand-900/25 px-6 py-3 text-sm font-semibold text-brand-900 transition hover:border-brand-900/45 hover:bg-surface-muted"
+            >
+              View Impact Metrics
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </Section>
+    </>
   );
 }
